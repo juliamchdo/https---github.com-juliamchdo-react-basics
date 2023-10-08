@@ -1,6 +1,7 @@
 import "./App.css";
 import { Component } from "react";
-import { PostCard } from "./components/PostCard";
+import { loadPosts } from "./utils/load-posts"
+import { Posts } from "./components/Posts";
 
 class App extends Component {
   state = {
@@ -8,33 +9,15 @@ class App extends Component {
     posts: [],
   };
 
-  timeoutUpdate = null;
-
   //lifecycle methods//
-  componentDidMount() {
-    this.loadPosts();
+  async componentDidMount() {
+    await this.loadPosts();
   }
   //lifecycle methods//
 
   loadPosts = async () => {
-    const postsResponse = fetch("https://jsonplaceholder.typicode.com/posts");
-    const photosResponse = fetch("https://jsonplaceholder.typicode.com/photos");
-
-    const [posts, photos] = await Promise.all([postsResponse, photosResponse]);
-
-    const postsJson = await posts.json();
-    const photosJson = await photos.json();
-
-    //como tem mais photos do que posts, retorna a quantidade exata
-    const photosAndPosts = postsJson.map((post, index) => {
-      return { ...post, cover: photosJson[index].url };
-    });
-
+    const photosAndPosts = await loadPosts();
     this.setState({ posts: photosAndPosts });
-
-    // fetch('https://jsonplaceholder.typicode.com/posts')
-    // .then(response => response.json())
-    // .then(posts => this.setState({ posts }))
   };
 
   render() {
@@ -43,17 +26,7 @@ class App extends Component {
 
     return (
       <section className="container">
-        <div className="posts">
-          {posts.map((post) => (
-            <PostCard
-              key={post.id}
-              title={post.title}
-              body={post.body}
-              cover={post.cover}
-              id={post.id}
-              />
-          ))}
-        </div>
+        <Posts posts={posts}/>
       </section>
     );
   }

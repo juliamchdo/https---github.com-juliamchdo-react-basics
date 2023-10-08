@@ -1,3 +1,8 @@
+# React Basics
+
+This is a project developed in a React.js and Next.js specialization course. In this specific repository, some basic concepts about React.js were addressed :)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

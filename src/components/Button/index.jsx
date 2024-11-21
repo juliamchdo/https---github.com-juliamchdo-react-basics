@@ -1,17 +1,11 @@
-import './style.css'
-import { Component } from "react";
+import "./style.css";
 
-export class Button extends Component{
-    render (){
-        const {text, loadMorePosts, disabled} = this.props;
-        return (
-            <button 
-                className='button' 
-                onClick={loadMorePosts}
-                disabled={disabled}
-            >
-                {text}
-            </button>
-        )
-    }
-}
+export const Button = (props) => {
+  const { text, loadMorePosts, disabled } = props;
+
+  return (
+    <button className="button" onClick={loadMorePosts} disabled={disabled}>
+      {text}
+    </button>
+  );
+};

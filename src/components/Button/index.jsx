@@ -1,10 +1,10 @@
 import "./style.css";
 
 export const Button = (props) => {
-  const { text, loadMorePosts, disabled } = props;
+  const { text, onClick, disabled } = props;
 
   return (
-    <button className="button" onClick={loadMorePosts} disabled={disabled}>
+    <button className="button" onClick={onClick} disabled={disabled}>
       {text}
     </button>
   );
